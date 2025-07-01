@@ -7,6 +7,7 @@ import AddTask from "./components/AddTask";
 import NavBar from "./components/NavBar";
 import Incomplete from "./components/Incomplete";
 import Completed from "./components/Completed";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 
 
@@ -15,7 +16,7 @@ const App = () => {
 
   async function fetchAllTasks() {
     try {
-      const response = await axios.get("https://client-side-routing-backend-xi.vercel.app/");
+      const response = await axios.get("http://localhost:8080/api/tasks");
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -37,7 +38,7 @@ const App = () => {
         <Route path="/" element={<TaskList tasks={tasks} fetchAllTasks={fetchAllTasks}/>} />
         <Route path="/add-task" element={<AddTask fetchAllTasks={fetchAllTasks}/>} />
         <Route path="/incomplete" element={<Incomplete tasks={tasks} fetchAllTasks={fetchAllTasks} />} />
-        <Route path="/completed" element={<Completed tasks={tasks} fetchAllTasks={fetchAllTasks} />} />
+        <Route path="/completed" element={<Completed tasks={tasks} fetchAllTasks={fetchAllTasks}/>} />
       </Routes>
     </div>
   );
